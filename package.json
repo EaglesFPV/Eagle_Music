@@ -1,0 +1,44 @@
+{
+  "name": "eagle-music",
+  "version": "1.0.0",
+  "description": "Eagle Music — Lecteur de musique personnel (YouTube + Local)",
+  "main": "src/main/main.js",
+  "author": "EaglesFPV",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder --win"
+  },
+  "build": {
+    "appId": "com.eaglesfpv.eaglemusic",
+    "productName": "Eagle Music",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "artifactName": "Eagle-Music-Setup-${version}.exe",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  },
+  "dependencies": {
+    "music-metadata": "^8.1.4",
+    "node-id3": "^0.2.6",
+    "ytdl-core": "^4.11.5",
+    "youtube-sr": "^4.3.9"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  }
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyMusic</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Barre de titre personnalisée -->
+  <div class="titlebar">
+    <div class="titlebar-drag">
+      <span class="app-logo">♪</span>
+      <span class="app-name">MyMusic</span>
+    </div>
+    <div class="titlebar-controls">
+      <button class="tb-btn" onclick="window.musicAPI.minimize()">─</button>
+      <button class="tb-btn" onclick="window.musicAPI.maximize()">□</button>
+      <button class="tb-btn close" onclick="window.musicAPI.close()">✕</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-view="search" onclick="showView('search', this)">
+          <span class="icon">🔍</span> Rechercher
+        </button>
+        <button class="nav-btn" data-view="library" onclick="showView('library', this)">
+          <span class="icon">🎵</span> Ma bibliothèque
+        </button>
+        <button class="nav-btn" data-view="downloads" onclick="showView('downloads', this)">
+          <span class="icon">⬇️</span> Téléchargés
+        </button>
+        <button class="nav-btn" data-view="queue" onclick="showView('queue', this)">
+          <span class="icon">📋</span> File d'attente
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="add-local-btn" onclick="addLocalFiles()">+ Ajouter des fichiers</button>
+      </div>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+
+      <!-- Vue Recherche -->
+      <div id="view-search" class="view active">
+        <div class="search-header">
+          <div class="search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-input" placeholder="Rechercher une musique, un artiste..." />
+            <button id="search-btn" onclick="performSearch()">Rechercher</button>
+          </div>
+        </div>
+        <div id="search-results" class="track-list"></div>
+      </div>
+
+      <!-- Vue Bibliothèque -->
+      <div id="view-library" class="view">
+        <div class="view-header">
+          <h2>Ma bibliothèque</h2>
+          <span id="library-count" class="count-badge">0 titres</span>
+        </div>
+        <div id="library-list" class="track-list"></div>
+      </div>
+
+      <!-- Vue Téléchargés -->
+      <div id="view-downloads" class="view">
+        <div class="view-header">
+          <h2>Titres téléchargés</h2>
+        </div>
+        <div id="downloads-list" class="track-list"></div>
+      </div>
+
+      <!-- Vue File d'attente -->
+      <div id="view-queue" class="view">
+        <div class="view-header">
+          <h2>File d'attente</h2>
+          <button onclick="clearQueue()" class="clear-btn">Vider</button>
+        </div>
+        <div id="queue-list" class="track-list"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Lecteur audio en bas -->
+  <div class="player">
+    <div class="player-track">
+      <div class="player-thumb" id="player-thumb">♪</div>
+      <div class="player-info">
+        <div class="player-title" id="player-title">Aucune piste sélectionnée</div>
+        <div class="player-artist" id="player-artist">—</div>
+      </div>
+      <button class="like-btn" id="like-btn" onclick="toggleLike()">♡</button>
+    </div>
+
+    <div class="player-controls">
+      <button class="ctrl-btn" id="btn-shuffle" onclick="toggleShuffle()" title="Aléatoire">⇄</button>
+      <button class="ctrl-btn" onclick="prevTrack()" title="Précédent">⏮</button>
+      <button class="ctrl-btn play-btn" id="play-btn" onclick="togglePlay()" title="Lecture">▶</button>
+      <button class="ctrl-btn" onclick="nextTrack()" title="Suivant">⏭</button>
+      <button class="ctrl-btn" id="btn-repeat" onclick="toggleRepeat()" title="Répéter">↻</button>
+    </div>
+
+    <div class="player-right">
+      <div class="progress-area">
+        <span class="time" id="current-time">0:00</span>
+        <div class="progress-bar" id="progress-bar" onclick="seekTo(event)">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <span class="time" id="total-time">0:00</span>
+      </div>
+      <div class="volume-area">
+        <span class="vol-icon">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="100" value="80" oninput="setVolume(this.value)" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div id="toast" class="toast hidden"></div>
+
+  <audio id="audio-player" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>

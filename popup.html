@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>À propos — Eagle Music</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f0f14;
+      color: #e8e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: #16161e;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 36px 40px;
+      text-align: center;
+      width: 340px;
+    }
+    .logo { font-size: 52px; margin-bottom: 12px; }
+    h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
+    .version {
+      display: inline-block;
+      margin-top: 6px;
+      background: rgba(108,99,255,0.2);
+      color: #6c63ff;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    p {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #8888aa;
+      line-height: 1.6;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 20px 0;
+    }
+    .meta { font-size: 12px; color: #555568; }
+    .meta span { color: #8888aa; }
+    .close-btn {
+      margin-top: 24px;
+      background: #6c63ff;
+      border: none;
+      color: #fff;
+      padding: 10px 28px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: opacity 0.15s;
+    }
+    .close-btn:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🦅</div>
+    <h1>Eagle Music</h1>
+    <span class="version">v1.0.0</span>
+    <p>Lecteur de musique personnel combinant YouTube et vos fichiers locaux. Lecture sans pub, téléchargement offline, haute qualité audio.</p>
+    <hr class="divider" />
+    <div class="meta">
+      Développé par <span>EaglesFPV</span><br/>
+      Basé sur <span>Electron v28</span> · <span>Node.js v20</span>
+    </div>
+    <button class="close-btn" onclick="window.close()">Fermer</button>
+  </div>
+</body>
+</html>
